@@ -1,0 +1,50 @@
+.AccueilCarrousel{
+  display: flex;
+  
+.imagesection{
+    background-color: #000000;
+    height: 65vh;
+    width: 100vw;
+    color: #FFF;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+
+    .info{
+      width: 45%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      
+      .text{
+        padding: 1rem;
+        padding-bottom: 2rem;
+        h1{
+          font-size: 4.5rem;
+        }
+        h3{
+          font-size: 2rem;
+        }
+      }
+    }
+
+    .image{
+      width: 56%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      .cercle{
+        width: 120%;
+        height: 130%;
+        border-radius: 100%;
+        background-color: #ae3535;
+        box-shadow: inset 0 0 2.5rem 40px black;
+        border: 1px solid black;
+        background-size: cover;
+        background-position: center;
+        background-repeat:no-repeat;
+      }
+    }
+  }
+}

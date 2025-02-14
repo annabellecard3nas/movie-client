@@ -1,0 +1,23 @@
+.Movie {
+  width: 10rem;
+  height: 100%;
+  background-color: #861111;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+.Movie .infofilm {
+  height: 93%;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+  padding: 0.5rem;
+  color: #FFF;
+}
+.Movie .infofilm:hover {
+  backdrop-filter: blur(5px);
+  border: 0.5px solid rgba(255, 255, 255, 0.6549019608);
+  opacity: 1;
+}/*# sourceMappingURL=Movie.css.map */
