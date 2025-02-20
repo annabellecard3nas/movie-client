@@ -1,0 +1,22 @@
+.Lesfilms {
+    min-height: 100vh;
+    width: 100%;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .filmsContainer {
+        display: grid;
+        justify-items: center;
+        grid-template-columns: repeat(5, 1fr);;
+        grid-gap: 1rem;
+    }
+
+    .Movie {
+        width: 12rem;
+        height: 17rem;
+        margin-top: 1rem;
+    }
+}

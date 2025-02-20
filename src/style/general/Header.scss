@@ -5,6 +5,7 @@
     justify-content: space-between;
     position: relative;
     z-index: 15;
+    background-color: black;
 
     .droite {
       display: flex;
@@ -23,11 +24,14 @@
         gap: 0.5rem;
         input{
           border: none;
-          border-radius: 5px;
+          border-radius: 25px;
+          padding-left: 0.5rem;
           background-color: #ffffff58;
           width: 20rem;
+          outline: none;
+          color: #e1e1e1;
           &::placeholder{
-            color: #969696;
+            color: #ababab;
           }
         }
       }
@@ -43,7 +47,7 @@
         text-decoration: none;
         color: #FFF;
 
-        li {}
+        
       }
     }
   }

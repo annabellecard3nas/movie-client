@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
-import "./Header.scss";
+
+import { useState } from "react";
+import SearchBar from "./SearchBar";
 
 function Header() {
   return (
@@ -8,7 +10,7 @@ function Header() {
         <p className="logo">movies-list</p>
         <div className="barreRecherche">
           <p>search</p>
-          <input type="text" placeholder="Search.."></input>
+          <SearchBar />
         </div>
       </div>
       <ul>
@@ -16,7 +18,7 @@ function Header() {
           <li>Accueil</li>
         </Link>
         <Link to="/">
-          <li>Movie</li>
+          <li>seen movies</li>
         </Link>
         <Link to="/watchlist">
           <li>WatchList</li>
