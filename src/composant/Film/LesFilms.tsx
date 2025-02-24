@@ -1,14 +1,19 @@
-import { useSearchParams } from "react-router-dom";
+import {  useNavigate, useSearchParams } from "react-router-dom";
 import FetchMovieGenre from "../fetch/FetchMovieGenre";
-import FetchMovies from "../fetch/FetchMovies";  // New FetchMovies function that fetches all movies
+import FetchMovies from "../fetch/FetchMovies";  
 import MovieProps from "../../types/MoviesProps";
 
 function Lesfilms() {
   const [searchParams] = useSearchParams();
   const genre = searchParams.get("genre");
+  const navigate= useNavigate()
 
-  // Fetch movies based on genre, or all movies if no genre is specified
-  const films: MovieProps[] = genre ? FetchMovieGenre(genre,{}) : FetchMovies({});  // FetchMovies fetches all movies
+  // Fetch movies en genre si specifier ou tout  sinon
+  const films: MovieProps[] = genre ? FetchMovieGenre(genre,{}) : FetchMovies({limit:null,filtre:null});  // FetchMovies fetches all movies
+
+  
+  console.log(films);
+  
 
   return (
     <div className="Lesfilms">
@@ -19,6 +24,7 @@ function Lesfilms() {
             key={film.id}
             className="Movie"
             style={{ backgroundImage: `url(${film.image})` }}
+            onClick={() => navigate(`/movie?id=${film.id}`)}
           >
             <div className="infofilm">
               <h4>{film.title}</h4>

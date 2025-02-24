@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 
 function JoinUs() {
   const navigate = useNavigate();
+
+  
   return (
     <div
       className="JoinUs"
@@ -21,7 +23,10 @@ function JoinUs() {
         </div>
         <div className="singInOutcontent">
           <div className="singInOut">
-            <h3>S'inscrire</h3>
+            <h3 className="inscription"
+            style={{ cursor: "pointer", }}
+            onClick={() => navigate("/inscription")} 
+            >S'inscrire</h3>
             <h3 className="connexion"
             style={{ cursor: "pointer", }}
             onClick={() => navigate("/connexion")} 

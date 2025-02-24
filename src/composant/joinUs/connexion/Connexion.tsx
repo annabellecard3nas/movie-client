@@ -1,53 +1,49 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Connexion() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    async function fetchUser() {
-      try {
-        const response = await fetch("http://localhost:2662/auth/signin"); // Adjust this endpoint if needed
-        const data = await response.json();
-        setUser(data);
-      } catch (err) {
-        console.error("Error fetching user:", err);
-      }
-    }
-    fetchUser();
-  }, []);
+  const navigate = useNavigate();
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null);
+  
     try {
       const response = await fetch("http://localhost:2662/auth/signin", {
         method: "POST",
+        credentials: "include", 
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
-
+  
       const data = await response.json();
-      if (response.ok) {
+  
+      if (response.ok && data.access_token) {
+        localStorage.setItem("access_token", data.access_token); // Enregistrer le token dans le localStorage
         console.log("User authenticated:", data);
-        // Handle user login or redirection after successful login
+        navigate("/profile"); // Rediriger vers la page profile après la connexion
       } else {
-        console.error("Authentication failed:", data);
+        setError(data.message || "Authentication failed");
       }
     } catch (err) {
-      console.error("Error during login:", err);
+      setError("Error during login");
     }
   };
+  
 
   return (
-    <div
-      className="Connexion"
-      style={{
-        backgroundImage:
-          "url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
-      }}
+    <div className="Connexion"
+    style={{
+      backgroundImage:
+        "url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+    }}
     >
       <div className="joinUs">
         <h1>Join</h1>
@@ -55,11 +51,10 @@ function Connexion() {
       </div>
       <div className="boiteConnexion">
         <h1>Connexion</h1>
-        <div className="formulaire">
-          <label htmlFor="email" className="form">
+        <form onSubmit={handleSubmit} className="formulaire">
+          <label>
             <h3>Email:</h3>
             <input
-              id="email"
               type="email"
               placeholder="Enter your email"
               required
@@ -67,10 +62,9 @@ function Connexion() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </label>
-          <label htmlFor="password" className="form">
+          <label>
             <h3>Password:</h3>
             <input
-              id="password"
               type="password"
               placeholder="Enter your password"
               required
@@ -78,8 +72,9 @@ function Connexion() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </label>
-        </div>
-        <button type="submit">connexion</button>
+          {error && <p style={{ color: "red" }}>{error}</p>}
+          <button type="submit" onClick={() => navigate(`/profile`)}>Connexion</button>
+        </form>
       </div>
     </div>
   );

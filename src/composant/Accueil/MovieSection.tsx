@@ -4,7 +4,9 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import MovieProps from "../../types/MoviesProps";
 import { useNavigate } from "react-router-dom";
 import FetchMovieGenre from "../fetch/FetchMovieGenre";
-import FetchMovies from "../fetch/FetchMovies";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { Button } from "@mui/material";
 // import Movie from "./Movie";
 // import Movie from "./Movie";
 
@@ -13,16 +15,13 @@ type MoviesContainer = {
 };
 
 function MovieSection({ films }: MoviesContainer) {
-  const genreHorreur = FetchMovieGenre("horreur",{});
-  const genreFantaisie = FetchMovieGenre("fantaisie",{});
-  const genreAction = FetchMovieGenre("Action",{});
-  const genreRomance = FetchMovieGenre("Romance",{});
-  const genreDrame = FetchMovieGenre("Drame",{});
+  const genreHorreur = FetchMovieGenre("horreur", {});
+  const genreFantaisie = FetchMovieGenre("fantaisie", {});
+  const genreAction = FetchMovieGenre("Action", {});
+  const genreRomance = FetchMovieGenre("Romance", {});
+  const genreDrame = FetchMovieGenre("Drame", {});
 
   const navigate = useNavigate();
-
-  const lesFilm = FetchMovies({ limit: 15 });
-
 
   // Références pour chaque section de films
   const filmsRef = useRef<HTMLDivElement>(null);
@@ -31,7 +30,6 @@ function MovieSection({ films }: MoviesContainer) {
   const actionRef = useRef<HTMLDivElement>(null);
   const romanceRef = useRef<HTMLDivElement>(null);
   const drameRef = useRef<HTMLDivElement>(null);
-  
 
   // Fonction de scroll
   const scroll = (
@@ -47,6 +45,8 @@ function MovieSection({ films }: MoviesContainer) {
     }
   };
 
+
+
   return (
     <div className="MovieSection">
       <h1>Films</h1>
@@ -55,7 +55,7 @@ function MovieSection({ films }: MoviesContainer) {
           <ArrowBackIosNewIcon />
         </div>
         <div className="lesfilms" ref={filmsRef}>
-          {lesFilm.map((film) => (
+          {films.map((film) => (
             <div
               key={film.id}
               className="Movie"
@@ -64,6 +64,13 @@ function MovieSection({ films }: MoviesContainer) {
             >
               <div className="infofilm">
                 <h4>{film.title}</h4>
+
+                <button >
+                  <VisibilityIcon />
+                </button>
+                {/* <button>
+                  <VisibilityOffIcon />
+                </button> */}
               </div>
             </div>
           ))}
@@ -210,7 +217,6 @@ function MovieSection({ films }: MoviesContainer) {
         </div>
       </div>
 
-
       {/* Section Drame */}
       <h1>Drame</h1>
       <div className="sectionDrame">
@@ -246,3 +252,5 @@ function MovieSection({ films }: MoviesContainer) {
 }
 
 export default MovieSection;
+
+
