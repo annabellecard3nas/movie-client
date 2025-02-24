@@ -15,11 +15,11 @@ type MoviesContainer = {
 };
 
 function MovieSection({ films }: MoviesContainer) {
-  const genreHorreur = FetchMovieGenre("horreur", {});
-  const genreFantaisie = FetchMovieGenre("fantaisie", {});
-  const genreAction = FetchMovieGenre("Action", {});
-  const genreRomance = FetchMovieGenre("Romance", {});
-  const genreDrame = FetchMovieGenre("Drame", {});
+  const genreHorreur = FetchMovieGenre("horreur", {limit:12});
+  const genreFantaisie = FetchMovieGenre("fantaisie", {limit:12});
+  const genreAction = FetchMovieGenre("Action", {limit:12});
+  const genreRomance = FetchMovieGenre("Romance", {limit:12});
+  const genreDrame = FetchMovieGenre("Drame", {limit:12});
 
   const navigate = useNavigate();
 
@@ -30,6 +30,10 @@ function MovieSection({ films }: MoviesContainer) {
   const actionRef = useRef<HTMLDivElement>(null);
   const romanceRef = useRef<HTMLDivElement>(null);
   const drameRef = useRef<HTMLDivElement>(null);
+
+
+  ///bouton 
+  
 
   // Fonction de scroll
   const scroll = (
@@ -44,7 +48,6 @@ function MovieSection({ films }: MoviesContainer) {
       });
     }
   };
-
 
 
   return (

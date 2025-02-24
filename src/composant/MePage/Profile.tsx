@@ -51,10 +51,10 @@ function Profile() {
             <h3>Mon email: {userInfo.email}</h3>
           </>
         ) : (
-          <p>Failed to load profile. Please login again.</p> // Si erreur lors de la récupération des données
+          <p>Échecs de chargement du profile. Veuillez vous reconnecter</p> 
         )}
 
-        {/* Affichage du bouton selon que l'utilisateur soit connecté ou non */}
+        {/* affichage de boutton dependament de la connexion  */}
         {localStorage.getItem("access_token") ? (
           <button onClick={handleLogout}>Déconnexion</button>
         ) : (
