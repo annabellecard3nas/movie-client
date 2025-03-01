@@ -12,7 +12,7 @@ function Profile() {
     const token = localStorage.getItem("access_token");
 
     if (!token) {
-      setLoading(false); // Si aucun token, arrête le chargement
+      setLoading(false); 
       return;
     }
 
@@ -43,23 +43,27 @@ function Profile() {
     <div className="Profile">
       <div className="MonProfile">
         <h1>Mon profile</h1>
-        {loading ? (
-          <p>Loading...</p> // Affiche un message de chargement
-        ) : userInfo ? (
-          <>
-            <h3>Mon username: {userInfo.name}</h3>
-            <h3>Mon email: {userInfo.email}</h3>
-          </>
-        ) : (
-          <p>Échecs de chargement du profile. Veuillez vous reconnecter</p> 
-        )}
+        <div className="info">
+          {loading ? (
+            <p>Loading...</p>
+          ) : userInfo ? (
+            <>
+              <h3>Mon username: {userInfo.name}</h3>
+              <h3>Mon email: {userInfo.email}</h3>
+            </>
+          ) : (
+            <p>Echecs de chargement du profile. veuillez vous connecter</p> 
+          )}
+        </div>
 
-        {/* affichage de boutton dependament de la connexion  */}
-        {localStorage.getItem("access_token") ? (
-          <button onClick={handleLogout}>Déconnexion</button>
-        ) : (
-          <button onClick={handleLoginRedirect}>Connexion</button>
-        )}
+        <div className="buttonProfile">
+          {/* affichage de boutton dependament de la connexion  */}
+          {localStorage.getItem("access_token") ? (
+            <button onClick={handleLogout}>Déconnexion</button>
+          ) : (
+            <button onClick={handleLoginRedirect}>Connexion</button>
+          )}
+        </div>
       </div>
     </div>
   );

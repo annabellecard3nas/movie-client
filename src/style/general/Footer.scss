@@ -1,5 +1,17 @@
 .Footer{
     background-color: black;
-    height: 35vh;
+    height: 25vh;
     color: #FFF;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    padding: 1.5rem;
+    ul{
+        list-style: none;
+        padding-left: 1rem;
+    }
+    a{
+        color: #c7c7c7;
+        text-decoration: none;
+    }
 }

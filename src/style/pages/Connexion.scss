@@ -17,12 +17,10 @@
 
         h1 {
             font-size: 5rem;
-
-        }
-
-        .us {
-            color: rgb(193, 23, 23);
-            font-style: italic;
+            .red{
+                color: rgb(193, 23, 23);
+                font-style: italic;
+            }
         }
 
     }
@@ -79,8 +77,11 @@
             font-size: 2rem;
             font-weight: bold;
             font-style: italic;
-           
+            align-self: center;
             color: #9f9f9f;
         }
+    }
+    .inscription{
+        align-self: center;
     }
 }

@@ -1,43 +1,115 @@
-.SeenMovie{
+.SeenMovie {
     min-height: 90vh;
     background-color: #0B0B0B;
     display: flex;
     flex-direction: column;
     align-items: center;
     color: #fff;
-    
-    h1{
+    padding-bottom: 2rem;
+
+    h1 {
         padding-top: 2rem;
         padding-bottom: 1rem;
     }
-    .contBookmark{
+
+    .contBookmark {
         min-width: 85%;
         min-height: 75vh;
-        background-color: rgb(38, 38, 38);
+        border-radius: 15px;
+        background-color: rgba(38, 38, 38, 0.787);
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-top: 1rem;
-        .bande{
+        padding-bottom: 1rem;
+
+        .bande {
             width: 95%;
             height: 15rem;
-            background-color: #000000;
+            border-radius: 10px;
+            background-color: #0e0e0e;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+
             padding: 1rem;
-            .filmInfo{
-                width: 70%;
-                height: 80%;
-                padding: 1rem;
-                background-color: rgba(255, 255, 255, 0.393);
+            margin-top: 1rem;
+
+
+            .filmInfo {
+                height: 100%;
+                width: 100%;
+                margin-left: 1rem;
+                position: relative;
+
+                .info {
+                    display: flex;
+                    width: 90%;
+                    justify-content: space-between;
+                    align-items: center;
+                    .lefilm {
+                        h4 {
+                            font-style: italic;
+                        }
+                    }
+                }
+
+                .noteInput {
+                    margin-top: 1rem;
+                    width: 93%;
+                    height: 10.7rem;
+                    background-color: #efefef24;
+                    border: 0.5px solid rgba(171, 171, 171, 0.274);
+                    border-radius: 5px;
+                    color: #fff;
+                }
+
+                .deleteBookmark {
+                    background-color: #454545;
+                    width: 3rem;
+                    height: 3rem;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: 0.5px solid #8b8b8b;
+                    position: absolute;
+                    right: -0.1rem;
+                    top: -0.1rem;
+                    transition: 0.3s;
+
+                    &:hover {
+                        box-shadow: 0px 0px 5px 2px #b80c0c;
+                        border: 0.5px solid #ac0c0c;
+                        background-color: #830a0a;
+                    }
+                }
+
+                .seemore {
+                    background-color: #454545;
+                    width: 3rem;
+                    height: 3rem;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: 0.5px solid #8b8b8b;
+                    position: absolute;
+                    right: -0.1rem;
+                    top: 12rem;
+                    transition: 0.3s;
+
+                    &:hover {
+                        box-shadow: 0px 0px 5px 2px #fff;
+                    }
+                }
             }
-            .image{
+
+            .image {
                 width: 12rem;
                 height: 100%;
                 background-size: cover;
-                background-position:top 3rem;
-                
+                background-position: top 3rem;
+                background-position: center;
+
+
             }
         }
     }

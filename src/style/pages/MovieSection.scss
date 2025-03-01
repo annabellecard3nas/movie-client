@@ -2,11 +2,13 @@
   display: flex;
   overflow-x: auto;
   scroll-behavior: smooth;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 .lesfilms::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
+  display: none;
+  /* Chrome, Safari */
 }
 
 
@@ -16,7 +18,8 @@
   padding-bottom: 1rem;
 
   h1 {
-    padding: 1rem;
+    padding: 0.5rem;
+    margin-left: 1.5rem;
     color: #FFF;
   }
 
@@ -25,8 +28,7 @@
   .sectionFantaisie,
   .sectionAction,
   .sectionRomance,
-  .sectionDrame
-  {
+  .sectionDrame {
     position: relative;
     width: 100%;
     height: 16rem;
@@ -50,6 +52,7 @@
       border-radius: 50%;
       padding: 0.5rem;
     }
+
     .fleche {
       right: 1rem;
     }
@@ -58,7 +61,7 @@
       left: 1rem;
     }
 
-    
+
   }
 
   .lesfilms {
@@ -70,19 +73,19 @@
     width: fit-content;
   }
 
-  .voirPlus{
+  .voirPlus {
     width: 10rem;
     height: 100%;
     background-color: #861111;
     border-radius: 10px;
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     color: #FFF;
     box-shadow: 0px 0px 4px 1px rgb(255, 30, 0);
-    transition:0.2s;
+    transition: 0.2s;
 
-    &:hover{
+    &:hover {
       box-shadow: 0px 0px 8px 1px red;
       background-color: #b51616;
     }
@@ -106,12 +109,35 @@
       transition: opacity 0.1s ease-in-out;
       padding: 0.5rem;
       color: #FFF;
+      position: relative;
 
       &:hover {
         backdrop-filter: blur(5px);
         border: 0.5px solid rgba(255, 255, 255, 0.65);
         opacity: 1;
       }
+
+      button {
+        background-color: #8b8b8b87;
+        border: 0.5px solid #FFF;
+        border-radius: 50%;
+        height: 3rem;
+        width: 3rem;
+        box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.526);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        
+        transition: 0.5s;
+
+        &:hover{
+          box-shadow: 0px 0px 5px 5px rgba(255, 255, 255, 0.833);
+        }
+      }
+      
     }
   }
 }

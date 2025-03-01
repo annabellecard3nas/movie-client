@@ -3,19 +3,14 @@ import { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 
 function Header() {
-  const [userName, setUserName] = useState<string | null>(null);
-
-  useEffect(() => {
-    const storedName = localStorage.getItem("user_name");
-    setUserName(storedName);
-  }, []);
+ 
 
   return (
     <div className="Header">
       <div className="droite">
         <p className="logo">movies-list</p>
         <div className="barreRecherche">
-          <p>search</p>
+          <p>Rechercher</p>
           <SearchBar />
         </div>
       </div>
@@ -24,13 +19,13 @@ function Header() {
           <li>Accueil</li>
         </Link>
         <Link to="/seenMovies">
-          <li>Watched</li>
+          <li>Signets</li>
         </Link>
-        <Link to="/watchlist">
+        {/* <Link to="/watchlist">
           <li>WatchList</li>
-        </Link>
+        </Link> */}
         <Link to="/profile">
-          <li>Welcome {userName || "Guest"}</li>
+          <li>Profile</li>
         </Link>
       </ul>
     </div>

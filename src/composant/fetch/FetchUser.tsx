@@ -1,4 +1,4 @@
-// fetchUser.ts
+
 
 const FetchUser = async (token: string) => {
   const response = await fetch("http://localhost:2662/user/me", {
@@ -16,4 +16,4 @@ const FetchUser = async (token: string) => {
   return response.json(); // Retourne les données de l'utilisateur
 };
 
-export default FetchUser; // Export par défaut
+export default FetchUser; 

@@ -7,17 +7,16 @@ import MovieProps from "./types/MoviesProps";
 import Header from "./composant/general/Header";
 import Profile from "./composant/MePage/Profile";
 import Lesfilms from "./composant/Film/LesFilms";
-import Connexion from "./composant/joinUs/connexion/Connexion";
+import Connexion from "./composant/joinUs/Connexion";
 import Footer from "./composant/general/Footer";
 import JoinUs from "./composant/joinUs/JoinUs";
-import Inscription from "./composant/joinUs/inscription/Inscription";
+import Inscription from "./composant/joinUs/Inscription";
 import SeenMovie from "./composant/bookmark/SeenMovie";
 
 
 
 function App() {
   const [movies, setMovies] = useState<MovieProps[]>([]);
-
   
 
   return (
