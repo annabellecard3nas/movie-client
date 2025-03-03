@@ -15,31 +15,24 @@ function SeenMovie() {
   const [bookmarkSeen, setBookmarkSeen] = useState<BookmarkSawProps[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [editingNote, setEditingNote] = useState<{ [id: number]: string }>({});
-  const [typingTimeout, setTypingTimeout] = useState<{
-    [id: number]: NodeJS.Timeout | null;
-  }>({});
+  const [editingRating, setEditingRating] = useState<{ [id: number]: number }>({});
+  const [typingTimeout, setTypingTimeout] = useState<{ [id: number]: NodeJS.Timeout | null }>({});
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (!token) {
-      setError("tu as besoin d'etre connecter pour voir tes bookmarks");
+      setError("tu as besoin d'être connecté pour voir tes bookmarks");
       return;
     }
 
     FetchUser(token)
-      .then((userData) => FetchBookmarkSaw(token, userData.id)) // Fetch bookmarks after getting user ID
+      .then((userData) => FetchBookmarkSaw(token, userData.id))
       .then(setBookmarkSeen)
-      .catch(() => setError("Failed to load bookmarks."));
+      .catch(() => setError("Échec du chargement des favoris."));
   }, []);
-  /**
-   *
-   * declarer que token est ce qui ce trouve dans localstorage comme accesss token
-   * declarer succes comme un variable pour amener fetch delete bookmark
-   * si le fetch delete a un token et  un bookmark id alors il va filtrer
-   * les bookmark pour trouver le id du film qu'on veut delete et le delete
-   */
+
   const handleDelete = async (bookmarkId: number) => {
     const token = localStorage.getItem("access_token");
     if (!token) return;
@@ -50,67 +43,91 @@ function SeenMovie() {
         prevBookmarks.filter((bookmark) => bookmark.id !== bookmarkId)
       );
     } else {
-      setError("Failed to delete bookmark.");
+      setError("Échec de la suppression du favori.");
     }
   };
 
   const handleNoteChange = (id: number, newNote: string) => {
     setEditingNote((prev) => ({ ...prev, [id]: newNote }));
 
-    // Clear previous timeout if user keeps typing
     if (typingTimeout[id]) {
       clearTimeout(typingTimeout[id]!);
     }
 
-    // Set a new timeout to save after user stops typing for 1 second
     const timeout = setTimeout(() => {
-      saveNote(id, newNote);
+      saveEdit(id, newNote, editingRating[id] ?? null);
     }, 1000);
 
     setTypingTimeout((prev) => ({ ...prev, [id]: timeout }));
   };
 
-  const saveNote = async (id: number, newNote: string) => {
+  const handleRatingChange = (id: number, newRating: number) => {
+    setEditingRating((prev) => ({ ...prev, [id]: newRating }));
+
+    if (typingTimeout[id]) {
+      clearTimeout(typingTimeout[id]!);
+    }
+
+    const timeout = setTimeout(() => {
+      saveEdit(id, editingNote[id] ?? "", newRating);
+    }, 1000);
+
+    setTypingTimeout((prev) => ({ ...prev, [id]: timeout }));
+  };
+
+  const saveEdit = async (id: number, newNote: string, newRating: number | null) => {
     const token = localStorage.getItem("access_token");
     if (!token) return;
 
     const bookmark = bookmarkSeen.find((b) => b.id === id);
     if (!bookmark) return;
 
-    const updatedBookmark = { ...bookmark, note: newNote };
+    const updatedBookmark = { ...bookmark, note: newNote, rating: newRating };
 
     const response = await FetchEdit(updatedBookmark, token, true);
     if (response) {
       setBookmarkSeen((prev) =>
-        prev.map((b) => (b.id === id ? { ...b, note: newNote } : b))
+        prev.map((b) =>
+          b.id === id ? { ...b, note: newNote, rating: newRating ?? b.rating } : b
+        )
       );
     } else {
-      setError("Échec de la mise à jour de la note.");
+      setError("Échec de la mise à jour.");
     }
   };
 
-  const rating = async ()=>{
-
-  }
   return (
     <div className="SeenMovie">
       <h1>Vos films vus</h1>
       <div className="contBookmark">
         {error && <p style={{ color: "red" }}>{error}</p>}
         {bookmarkSeen.length > 0 ? (
-          bookmarkSeen.map(({ id, movie, note }) => (
-            <div className="bande">
+          bookmarkSeen.map(({ id, movie, note, rating }) => (
+            <div key={id} className="bande">
               <div
                 className="image"
                 style={{ backgroundImage: `url(${movie.image})` }}
               ></div>
-              <div key={id} className="filmInfo">
+              <div className="filmInfo">
                 <div className="info">
                   <div className="lefilm">
                     <h2>{movie.title}</h2>
                     <h4>{movie.genre}</h4>
                   </div>
-                  <h2>{}/5</h2>
+                  <div className="rating">
+                    <select
+                      value={editingRating[id] ?? rating ?? 0}
+                      onChange={(e) => handleRatingChange(id, Number(e.target.value))}
+                    >
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                    <span>/5</span>
+                  </div>
                 </div>
                 <textarea
                   className="noteInput"
